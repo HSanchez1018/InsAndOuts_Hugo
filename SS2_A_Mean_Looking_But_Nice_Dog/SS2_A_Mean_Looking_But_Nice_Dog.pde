@@ -118,13 +118,11 @@ rect(b,550,50,15);
 
 }
 
-void keyPressed() {
-  if(keyPressed) {
-    fill(254,255,5);
-    ellipse(35,30,90,80);
+  void keyPressed() {
+  if (c == 0) {
+    c = 75;
   } else {
-    fill(19,57,188);
-    rect(0,60,1080,60);
+    c = 0;
   }
 }
   
