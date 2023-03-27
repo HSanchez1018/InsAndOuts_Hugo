@@ -1,5 +1,8 @@
 String state= "pregame";
 
+
+int [] birds = new int [11];
+
 int p = 10;
 int n = 10;
 int c = 0;
@@ -13,6 +16,14 @@ int speed = 1;
 void setup() {
   size(1080,720);
   textSize(24);
+  
+  for(int i = 0; i < birds.length; i++) {
+    birds[i] = int(random(10,60));
+  }
+  
+  noStroke();
+  fill(4,188,17);
+  rect(0, 550, width, h); 
 }
 
 void  draw() {
@@ -37,7 +48,7 @@ void mousePressed() {
 }
 
 void pregame() {
-background(255);
+background(231,247,7);
   
   //ears
   text("Click to start", 500, 600);
@@ -92,17 +103,38 @@ fill(252,173,87);
 
 //bone
   fill(222,164,105);
-  rect(250,600,50,15);  
+  rect(250,600,50,15); 
+  
+  rect(400,505,35,p);
+
+  stroke(0);
+  rect(463,505,35,p);
+  
+  rect(659,504,35,n);
+
+  stroke(0);
+  rect(722,504,35,n);
 }
 
 void game() {
   background(255);
   
-  text("Click to end event", 450, 50);
-  
   noStroke();
   fill(4,188,17);
-  rect(0, 550, width, h);  
+  rect(0, 550, width, h); 
+  
+  if(mouseX >540){
+    fill(255,176,3);
+    ellipse(mouseX,0,230,230);
+  } else if (mouseX > 800) {
+    fill(227,131,5);
+    ellipse(mouseX,0,230,230);
+  }
+  
+  for (int i = 0; i < birds.length; i++) {
+    noFill();   
+    ellipse(i * 70,75,birds[i],birds[i]);
+  }
   
   for(int x = 0; x <= width; x += 100) {
   fill(255,244,113);
@@ -118,7 +150,7 @@ noStroke();
 
 for(int g = 70; g <= width; g+=100) {
   if(mouseY <= 130 && mouseX >= 70) {
-    fill(240,15,139);
+    fill(3,244,255);
     ellipse(g,130,60,20);
   }
 }
@@ -144,17 +176,32 @@ fill(252,173,87);
   rect(365,379,425,125);
   
 //legs 1 && 2
+  if(mouseY > 505) {
+    fill(252,173,87);
+  stroke(0);
+  rect(400,505,35,p + grow);
+
+  stroke(0);
+  rect(463,505,35,p + grow); 
+  grow++;
+  }
+  
+//legs 3 && 4
+  if(mouseX > 659) {
   fill(252,173,87);
   stroke(0);
-  rect(400,505,35,p);
+  rect(659,504,35,n + grow);
 
-  //fill(252,173,87);
   stroke(0);
-  rect(463,505,35,p);  
+  rect(722,504,35,n + grow);
+  grow++;
+  }
   
 //tail
+  if(mouseX <= 350) {
   strokeWeight(5);
-  line(290,450,362,450);
+  line(362,450,mouseX,450);
+  }
   
 //eye left && right
   
@@ -177,12 +224,83 @@ fill(252,173,87);
   strokeWeight(3);
   line(728,342,745,342);
 
-//bone
+//bone 
   fill(222,164,105);
-  rect(250,600,50,15);  
+  rect(b,550,50,15);
+  
+  
+  text("Click to end event", 450, 50);
+  
+  if(mouseX >540){
+    fill(255,176,3);
+    ellipse(mouseX,0,230,230);
+  } else if (mouseX > 800) {
+    fill(227,131,5);
+    ellipse(mouseX,0,230,230);
+  } else {
+    fill(231,247,7);
+  ellipse(mouseX,0,230,230);
+  }
 }
 
 void gameover() {
+  background(41,77,167);
+  
+  //grass
+  fill(5,149,46);
+  rect(0,560,width,500);
+  
+  //clouds
+  for(int g = 70; g <= width; g+=100) {
+  fill(108,110,115);
+  ellipse(g,130,60,20);
+  
+  if(mouseY <= 130) {
+    fill(193,196,242);
+    ellipse(g,130,60,20);
+    }
+  }
+  
+  //legs 1 && 2
+  noStroke();
+  fill(203,117,10);
+  rect(230,523,100,35);
+  rect(190,523,100,35);
+  
+  rect(230,400,100,35);
+  rect(190,400,100,35);
+  
+  //legs 3 && 4
+  rect(615,385,100,35);
+  rect(645,385,100,35);
+  
+  rect(615,523,100,35);
+  rect(648,523,100,35);
+  
+  //body dog
+  fill(203,117,10);
+  stroke(0);
+  ellipseMode(CENTER);
+  ellipse(500,470,500,172);
+  
+  //face dog
+  ellipse(780,470,90,75);
+  
+  //eye dog
+  line(760,480,785,480);
+  if(mouseY >= 465) {
+    ellipse(mouseX,465,10,15);
+  } else {
+    line(785,465,795,465);
+  }
+  
+  //tail dog
+  strokeWeight(5);
+  line(150,475,250,475);
+  
+  //moon
+  fill(215);
+  ellipse(mouseX,0,230,230);
   
 }
 
