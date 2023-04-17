@@ -1,3 +1,7 @@
+//A Mean But Funny Looking Dog
+// Directions: Move Around Mouse Left, Right, Up & Down For Changes In The Sketch
+
+
 String state= "pregame";
 
 
